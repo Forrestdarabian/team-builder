@@ -1,52 +1,57 @@
 import React, { useState } from "react";
+import "./App.css";
 
-function App2() {
+function App() {
   const [user, setUser] = useState({ name: "", email: "", role: "" });
 
+  const handleChange = event => {
+    setUser({ ...user, [event.target.name]: event.target.value });
+  };
 
-  function handleSubmit(event) {
+  const handleSubmit = event => {
     event.preventDefault();
-    console.log("Username: ", event.target.value);
-  }
+    setUser({ name: "", email: "", role: "" })
+    console.log(user.name);
+    console.log(user.email);
+    console.log(user.role);
 
-  function inputHandler(event) {
-    const updatedUser = { ...user, [event.target.name]: event.target.value };
-    setUser(updatedUser);
-  }
+  };
+
   return (
     <div className="App">
+      {console.log(user)}
       <form onSubmit={event => handleSubmit(event)}>
         <label>
-        Name:
+          Name:
           <input
             type="text"
-            id="name"
+            name="name"
             value={user.name}
-            onChange={inputHandler}
+            onChange={event => handleChange(event)}
           />
         </label>
         <label>
           Email:
           <input
-            type="email"
-            id="email"
+            type="text"
+            name="email"
             value={user.email}
-            onChange={inputHandler}
+            onChange={event => handleChange(event)}
           />
         </label>
         <label>
           Role:
           <input
             type="text"
-            id="role"
+            name="role"
             value={user.role}
-            onChange={inputHandler}
+            onChange={event => handleChange(event)}
           />
         </label>
-        <button onClick={handleSubmit}>Submit!</button>
+        <button>Submit!</button>
       </form>
     </div>
   );
 }
 
-export default App2;
+export default App;
